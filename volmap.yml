@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-file-config
+data:
+  app.conf: |
+    log_format=standard
+    retry_count=3
