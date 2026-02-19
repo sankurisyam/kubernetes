@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: syam32/pyweb:v2
+
+        envFrom:
+        - configMapRef:
+            name: app-env-config
+        volumeMounts:
+        - name: app-file
+          mountPath: /app/config
+      volumes:
+      - name: app-file
+        configMap:
+          name: app-file-config
